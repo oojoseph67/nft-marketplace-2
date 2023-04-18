@@ -159,17 +159,24 @@ const TokenId = ({ nft, contractMetadata }) => {
             </Link>
           </Box>
           <Stack backgroundColor={"#EEE"} p={2.5} borderRadius={"6px"}>
+            {directListing && directListing[0] ? (
+              <Text fontSize={"xl"} color={"darkgray"}>
+                Direct Listing
+              </Text>
+            ) : (
+              <Text fontSize={"xl"} color={"darkgray"}>
+                Auction Listing
+              </Text>
+            )}
             <Text color={"darkgray"}>Price:</Text>
             <Skeleton isLoaded={!loadingMarketplace && !loadingDirectListing}>
               {directListing && directListing[0] ? (
                 <Text fontSize={"3xl"} fontWeight={"bold"}>
-                  Direct
                   {directListing[0]?.currencyValuePerToken.displayValue}
                   {" " + directListing[0]?.currencyValuePerToken.symbol}
                 </Text>
               ) : auctionListing && auctionListing[0] ? (
                 <Text fontSize={"3xl"} fontWeight={"bold"}>
-                  Auction
                   {auctionListing[0]?.buyoutCurrencyValue.displayValue}
                   {" " + auctionListing[0]?.buyoutCurrencyValue.symbol}
                 </Text>

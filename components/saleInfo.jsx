@@ -14,6 +14,7 @@ import {
   Box,
   Input,
   Stack,
+  Tabs,
   Tab,
   TabList,
   TabPanel,
@@ -104,7 +105,7 @@ const SaleInfo = ({ nft }) => {
   }
 
   return (
-    <Tab>
+    <Tabs>
       <TabList>
         <Tab>Direct</Tab>
         <Tab>Auction</Tab>
@@ -194,7 +195,7 @@ const SaleInfo = ({ nft }) => {
               }}
               onSuccess={(txResult) => {
                 router.push(
-                  `/token/${NFT_COLLECTION_ADDRESS}/${nft.metadata.id}}`
+                  `/token/${NFT_COLLECTION_ADDRESS}/${nft.metadata.id}`
                 );
               }}>
               Create Auction Listing
@@ -202,7 +203,7 @@ const SaleInfo = ({ nft }) => {
           </Stack>
         </TabPanel>
       </TabPanels>
-    </Tab>
+    </Tabs>
   );
 };
 
