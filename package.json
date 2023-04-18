@@ -21,6 +21,7 @@
     "next": "^13",
     "react": "^18.2",
     "react-dom": "^18.2",
+    "react-hook-form": "^7.43.9",
     "thirdweb": "^0.10.11"
   },
   "devDependencies": {
