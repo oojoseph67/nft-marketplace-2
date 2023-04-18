@@ -23,7 +23,13 @@ const NFTComponent = ({ nft }) => {
       tokenId: nft.metadata.id,
     });
 
-    console.log("directListing", directListing)
+  const { data: auctionListing, isLoading: loadingAuction } =
+    useValidEnglishAuctions(marketplace, {
+      tokenContract: NFT_COLLECTION_ADDRESS,
+      tokenId: nft.metadata.id,
+    });
+
+  console.log("directListing", directListing);
 
   return (
     <Flex
@@ -44,18 +50,30 @@ const NFTComponent = ({ nft }) => {
       <Text fontSize={"small"} color={"darkgray"}>
         Token ID #{nft.metadata.id}
       </Text>
-          <Text fontWeight={"bold"}>Token Name {" "} {nft.metadata.name}</Text>
+      <Text fontWeight={"bold"}>Token Name {nft.metadata.name}</Text>
       <Box>
-        {loadingMarketplace || loadingDirectListing ? (
+        {loadingMarketplace || loadingDirectListing || loadingAuction ? (
           <Skeleton></Skeleton>
         ) : directListing && directListing[0] ? (
-          <Flex direction={"column"}>
-            <Text fontSize={"small"}>Price</Text>
-            <Text fontSize={"small"}>
-              $
-              {`${directListing[0]?.currencyValuePerToken.displayValue} ${directListing[0]?.currencyValuePerToken.symbol}`}
-            </Text>
-          </Flex>
+          <Box>
+            <Flex direction={"column"}>
+              <Text fontSize={"small"}>Price</Text>
+              <Text fontSize={"small"}>
+                $
+                {`${directListing[0]?.currencyValuePerToken.displayValue} ${directListing[0]?.currencyValuePerToken.symbol}`}
+              </Text>
+            </Flex>
+          </Box>
+        ) : auctionListing && auctionListing[0] ? (
+          <Box>
+            <Flex direction={"column"}>
+              <Text fontSize={"small"}>Minimum Bid</Text>
+              <Text fontSize={"small"}>
+                $
+                {`${auctionListing[0]?.minimumBidCurrencyValue.displayValue} ${auctionListing[0]?.minimumBidCurrencyValue.symbol}`}
+              </Text>
+            </Flex>
+          </Box>
         ) : (
           <Box>
             <Flex direction={"column"}>
